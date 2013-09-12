@@ -7,6 +7,8 @@ from sklearn import metrics,preprocessing,cross_validation
 from sklearn.feature_extraction.text import TfidfVectorizer
 import sklearn.linear_model as lm
 import pandas as pd
+from sklearn.svm import SVC
+
 
 def main():
     # train = list(np.array(pd.read_table('data/train.tsv'))[:, 2])
@@ -23,6 +25,8 @@ def main():
     rd = lm.LogisticRegression(penalty='l2', dual=True, tol=0.0001,
                                C=1, fit_intercept=True, intercept_scaling=1.0,
                                class_weight=None, random_state=None)
+
+    svc = SVC(probability=True)
     # tfidfVectorizer.fit(X_all)
     # X_all = tfidfVectorizer.transform(X_all)
 
@@ -31,8 +35,20 @@ def main():
     X = X_all[:lentrain]
     X_test = X_all[lentrain:]
 
-    print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, X, y, cv=20, scoring='roc_auc'))
-    rd.fit(X, y)
+    # TODO use grid search to estimate parameters http://scikit-learn.org/dev/auto_examples/grid_search_digits.html
+    param_grid = [
+        {'C': [1, 10, 100, 1000], 'kernel': ['linear']},
+        {'C': [1, 10, 100, 1000], 'gamma': [0.001, 0.0001], 'kernel': ['rbf']},
+    ]
+
+    print "RD 5 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, X, y, cv=5, scoring='roc_auc'))
+    print "RD 20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, X, y, cv=20, scoring='roc_auc'))
+    print "SVC 5 Fold CV Score: ", np.mean(cross_validation.cross_val_score(svc, X, y, cv=5, scoring='roc_auc'))
+    # print "SVC 20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(svc, X, y, cv=20, scoring='roc_auc'))
+
+
+    # Predict
+    # rd.fit(X, y)
     # pred = rd.predict_proba(X_test)[:,1]
     # testfile = pd.read_csv('data/test.tsv', sep="\t", na_values=['?'], index_col=1)
     # pred_df = pd.DataFrame(pred, index=testfile.index, columns=['label'])
