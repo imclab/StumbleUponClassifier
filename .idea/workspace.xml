@@ -4,7 +4,7 @@
     <list default="true" id="3d53a7d7-82cf-4629-bd40-70415b1772bc" name="Default" comment="" />
     <ignored path="su-clf.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/reader.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379022625392" ignored="false" />
+    <file path="/reader.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379022817935" ignored="false" />
     <file path="/bench.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379018396082" ignored="false" />
     <file path="/grid.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379021208358" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="reader.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="reader.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="31" selection-start="1210" selection-end="1210" vertical-scroll-proportion="0.0">
+            <state line="30" column="57" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.46560848">
               <folding>
                 <element signature="e#31#49#0" expanded="true" />
               </folding>
@@ -37,10 +37,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="grid.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="grid.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/grid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="19" selection-start="1613" selection-end="1613" vertical-scroll-proportion="1.2433863">
+            <state line="47" column="19" selection-start="1613" selection-end="1613" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -411,20 +411,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reader.py">
+    <entry file="file://$PROJECT_DIR$/data/grid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="31" selection-start="1210" selection-end="1210" vertical-scroll-proportion="0.0">
+        <state line="47" column="19" selection-start="1613" selection-end="1613" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#31#49#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/grid.py">
+    <entry file="file://$PROJECT_DIR$/reader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="19" selection-start="1613" selection-end="1613" vertical-scroll-proportion="1.2433863">
+        <state line="30" column="57" selection-start="1319" selection-end="1319" vertical-scroll-proportion="0.46560848">
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#31#49#0" expanded="true" />
           </folding>
         </state>
       </provider>

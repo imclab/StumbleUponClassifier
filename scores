@@ -6,3 +6,4 @@ To beat:           0.876809206097
 20 Fold CV Score:  0.870306119029 120 topics @ 2000 iterations training on full.corpus
 20 Fold CV Score:  0.870045281254 120 topics @ 2000 iterations training on only train.corpus
 
+

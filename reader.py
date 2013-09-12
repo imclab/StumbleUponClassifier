@@ -26,8 +26,8 @@ def main():
                                C=1, fit_intercept=True, intercept_scaling=1.0,
                                class_weight=None, random_state=None)
 
-    svc = SVC(C=1, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
-                kernel='linear', max_iter=-1, probability=False, random_state=None,
+    svc = SVC(C=1, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.001,
+                kernel='rbf', max_iter=-1, probability=False, random_state=None,
                 shrinking=True, tol=0.001, verbose=False)
 
     # tfidfVectorizer.fit(X_all)
