@@ -4,7 +4,8 @@
     <list default="true" id="3d53a7d7-82cf-4629-bd40-70415b1772bc" name="Default" comment="" />
     <ignored path="su-clf.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/reader.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379014246823" ignored="false" />
+    <file path="/reader.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379018821230" ignored="false" />
+    <file path="/bench.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379018396082" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,11 +25,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="reader.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="reader.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="16" selection-start="80" selection-end="80" vertical-scroll-proportion="0.21164021">
-              <folding />
+            <state line="18" column="80" selection-start="809" selection-end="809" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#31#49#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bench.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bench.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="38" selection-start="2639" selection-end="2639" vertical-scroll-proportion="0.65608466">
+              <folding>
+                <element signature="e#34#52#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -44,6 +58,7 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/reader.py" />
+        <option value="$PROJECT_DIR$/bench.py" />
       </list>
     </option>
   </component>
@@ -119,7 +134,7 @@
       <PyConsoleSettings />
     </option>
   </component>
-  <component name="RunManager" selected="Python.reader">
+  <component name="RunManager" selected="Python.bench">
     <configuration default="false" name="reader" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -134,6 +149,25 @@
       <module name="su-clf" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/reader.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="bench" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="su-clf" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bench.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -199,12 +233,14 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.reader" />
+      <item index="1" class="java.lang.String" itemvalue="Python.bench" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python.reader" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python.bench" />
+        <item index="1" class="java.lang.String" itemvalue="Python.reader" />
       </list>
     </recent_temporary>
   </component>
@@ -320,8 +356,19 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/reader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="16" selection-start="80" selection-end="80" vertical-scroll-proportion="0.21164021">
-          <folding />
+        <state line="18" column="80" selection-start="809" selection-end="809" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#31#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bench.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="38" selection-start="2639" selection-end="2639" vertical-scroll-proportion="0.65608466">
+          <folding>
+            <element signature="e#34#52#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
