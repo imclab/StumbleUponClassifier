@@ -36,6 +36,7 @@ def main():
     # lentrain = len(train)
     lentrain = 7395
     X = X_all[:lentrain]
+    lentrain = len(traindata)
     X_test = X_all[lentrain:]
 
     # TODO use grid search to estimate parameters http://scikit-learn.org/dev/auto_examples/grid_search_digits.html
