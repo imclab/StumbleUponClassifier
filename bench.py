@@ -18,12 +18,12 @@ loadData = lambda f: np.genfromtxt(open(f, 'r'), delimiter=' ')
 def main():
     print "loading data.."
     # load cleaned test and a/b test with default file
-    traindata = list(np.array(p.read_table('data/train.tsv'))[:, 2])
-    testdata = list(np.array(p.read_table('data/test.tsv'))[:, 2])
-    trainAlchemyCats = list(np.array(p.read_table('data/train.tsv'))[:, 3])
-    testAlchemyCats = list(np.array(p.read_table('data/test.tsv'))[:, 3])
+    traindata = list(np.array(p.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, 2])
+    testdata = list(np.array(p.read_table('/media/Storage/workspace/sudata/test.tsv'))[:, 2])
+    trainAlchemyCats = list(np.array(p.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, 3])
+    testAlchemyCats = list(np.array(p.read_table('/media/Storage/workspace/sudata/test.tsv'))[:, 3])
     allAlchemyCats = trainAlchemyCats + testAlchemyCats
-    y = np.array(p.read_table('data/train.tsv'))[:, -1]
+    y = np.array(p.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, -1]
 
     # parse json, extract title and body, filter stopwords and stem
 
@@ -74,9 +74,9 @@ def main():
     pred = rd.predict_proba(X_test)[:, 1]
     # pred = clf.predict(X_test)[:, 1]
 
-    testfile = p.read_csv('data/test.tsv', sep="\t", na_values=['?'], index_col=1)
+    testfile = p.read_csv('/media/Storage/workspace/sudata/test.tsv', sep="\t", na_values=['?'], index_col=1)
     pred_df = p.DataFrame(pred, index=testfile.index, columns=['label'])
-    pred_df.to_csv('benchmark.csv')
+    pred_df.to_csv('/media/Storage/workspace/sudata/benchmark.csv')
     print "submission file created.."
 
 

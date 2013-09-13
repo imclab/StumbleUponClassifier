@@ -12,13 +12,17 @@ from sklearn.svm import SVC
 
 def main():
     # train = list(np.array(pd.read_table('data/train.tsv'))[:, 2])
-    X_all = np.genfromtxt("/media/Storage/workspace/topicmodeling/src/main/resources/report.csv", delimiter=",")
-    # tfidfVectorizer = TfidfVectorizer(min_df=3,    max_features=None, strip_accents='unicode',
-    #             analyzer='word', token_pattern=r'\w{1,}',
-    #             ngram_range=(1, 2), use_idf=1, smooth_idf=1, sublinear_tf=1)
+    train = list(np.array(pd.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, 2])
+    # X_all = np.genfromtxt("/media/Storage/workspace/topicmodeling/src/main/resources/report.csv", delimiter=",")
+    X_all = np.genfromtxt("/media/Storage/workspace/sudata/report.csv", delimiter=",")
+
+    tfidfVectorizer = TfidfVectorizer(min_df=3,    max_features=None, strip_accents='unicode',
+                analyzer='word', token_pattern=r'\w{1,}',
+                ngram_range=(1, 2), use_idf=1, smooth_idf=1, sublinear_tf=1)
 
     # y = np.array(pd.read_csv('/media/Storage/s-old/StumbleUpon/data/y'))
-    y = np.array(pd.read_table('/media/Storage/s-old/StumbleUpon/data/y'))[:, 0]
+    # y = np.array(pd.read_table('/media/Storage/s-old/StumbleUpon/data/y'))[:, 0]
+    y = np.array(pd.read_table('/media/Storage/workspace/sudata/y'))[:, 0]
     print type(y)
     print y.shape
 
@@ -30,13 +34,12 @@ def main():
                 kernel='rbf', max_iter=-1, probability=False, random_state=None,
                 shrinking=True, tol=0.001, verbose=False)
 
-    # tfidfVectorizer.fit(X_all)
-    # X_all = tfidfVectorizer.transform(X_all)
+    tfidfVectorizer.fit(X_all)
+    X_all = tfidfVectorizer.transform(X_all)
 
-    # lentrain = len(train)
-    lentrain = 7395
+    lentrain = len(train)
+    # lentrain = 7395
     X = X_all[:lentrain]
-    lentrain = len(traindata)
     X_test = X_all[lentrain:]
 
     # TODO use grid search to estimate parameters http://scikit-learn.org/dev/auto_examples/grid_search_digits.html
@@ -45,9 +48,8 @@ def main():
         {'C': [1, 10, 100, 1000], 'gamma': [0.001, 0.0001], 'kernel': ['rbf']},
     ]
 
-    print "RD 5 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, X, y, cv=5, scoring='roc_auc'))
     print "RD 20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, X, y, cv=20, scoring='roc_auc'))
-    print "SVC 5 Fold CV Score: ", np.mean(cross_validation.cross_val_score(svc, X, y, cv=5, scoring='roc_auc'))
+    # print "SVC 5 Fold CV Score: ", np.mean(cross_validation.cross_val_score(svc, X, y, cv=5, scoring='roc_auc'))
     # print "SVC 20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(svc, X, y, cv=20, scoring='roc_auc'))
 
 
