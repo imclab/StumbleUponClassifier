@@ -9,23 +9,27 @@ import pandas as pd
 from sklearn.svm import SVC
 from scipy import sparse
 
-
+# need to transpose X-all?
 def main():
     # traindata = list(np.array(pd.read_table('/home/gavin/dev/StumbleUponData/train.tsv'))[:, 2])
-    traindata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, 2])
+    # traindata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, 2])
+    traindata = [line.strip() for line in open('../StumbleUponData/train.tsv.clean.stem')]
 
     # testdata = list(np.array(pd.read_table('/home/gavin/dev/StumbleUponData/test.tsv'))[:, 2])
-    testdata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/test.tsv'))[:, 2])
+    # testdata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/test.tsv'))[:, 2])
+    testdata = [line.strip() for line in open('../StumbleUponData/test.tsv.clean.stem')]
 
-    # X_all_topics = np.genfromtxt("/home/gavin/dev/StumbleUponData/features.csv", delimiter=",")
-    X_all_topics = np.genfromtxt("/media/Storage/workspace/sudata/features.csv", delimiter=",")
+    X_all_topics = np.genfromtxt("/home/gavin/dev/StumbleUponData/features.csv", delimiter=",")
+    # X_all_topics = np.genfromtxt("/media/Storage/workspace/sudata/features.csv", delimiter=",")
+    X_all_cats = np.genfromtxt("/home/gavin/dev/StumbleUponData/cat_vectors.csv", delimiter=",")
+    # X_all_cats = np.genfromtxt("/media/Storage/workspace/sudata/cat_vectors.csv", delimiter=",")
+    # X_all_is_news = np.genfromtxt('../StumbleUponData/is_news.csv', delimiter=',')
+    X_all_is_news = np.asmatrix(np.loadtxt('../StumbleUponData/is_news.csv', delimiter=','))
 
-    X_all_cats = np.genfromtxt("/media/Storage/workspace/sudata/cat_vectors.csv", delimiter=",")
+    y = np.array(pd.read_table('/home/gavin/dev/StumbleUponData/train.tsv'))[:, -1]
+    # y = np.array(pd.read_table('/media/Storage/workspace/sudata/y'))[:, 0]
 
-    # y = np.array(pd.read_table('/home/gavin/dev/StumbleUponData/train.tsv'))[:, -1]
-    y = np.array(pd.read_table('/media/Storage/workspace/sudata/y'))[:, 0]
-
-    tfidfVectorizer = TfidfVectorizer(min_df=3,    max_features=None, strip_accents='unicode',
+    tfidfVectorizer = TfidfVectorizer(min_df=3, max_features=None, strip_accents='unicode',
                 analyzer='word', token_pattern=r'\w{1,}',
                 ngram_range=(1, 2), use_idf=1, smooth_idf=1, sublinear_tf=1)
 
@@ -34,21 +38,29 @@ def main():
                                class_weight=None, random_state=None)
 
     print 'fitting vectorizer'
-    # tfidfVectorizer.fit(testdata)
-    # X_test = tfidfVectorizer.transform(testdata)
 
+    # tfidf features
     X_all = traindata + testdata
     lentrain = len(traindata)
     tfidfVectorizer.fit(X_all)
     X_all = tfidfVectorizer.transform(X_all)
 
+    # category features
     X_all = sparse.hstack((X_all, X_all_cats))
     X_all = X_all.tocsr()
 
+    # topic features
     X_all = sparse.hstack((X_all, X_all_topics))
     X_all = X_all.tocsr()
 
-    print "RD 20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, X_all[:lentrain], y, cv=20, scoring='roc_auc'))
+    # is news feature
+    print len(X_all_is_news), X_all_is_news.shape, type(X_all_is_news)
+    print X_all.shape
+    X_all = sparse.hstack((X_all, X_all_is_news))
+    X_all = X_all.tocsr()
+
+    print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(
+        rd, X_all[:lentrain], y, cv=20, scoring='roc_auc'))
 
     # X_test = X_all[lentrain:]
     # X = X_all[:lentrain]
@@ -60,11 +72,11 @@ def main():
     rd.fit(X_all[:lentrain], y)
     pred = rd.predict_proba(X_all[lentrain:])[:, 1]
 
-    # testfile = pd.read_csv('/home/gavin/dev/StumbleUponData/test.tsv', sep="\t", na_values=['?'], index_col=1)
-    testfile = pd.read_csv('/media/Storage/workspace/sudata/test.tsv', sep="\t", na_values=['?'], index_col=1)
+    testfile = pd.read_csv('/home/gavin/dev/StumbleUponData/test.tsv', sep="\t", na_values=['?'], index_col=1)
+    # testfile = pd.read_csv('/media/Storage/workspace/sudata/test.tsv', sep="\t", na_values=['?'], index_col=1)
     pred_df = pd.DataFrame(pred, index=testfile.index, columns=['label'])
-    # pred_df.to_csv('/home/gavin/dev/StumbleUponData/submission.csv')
-    pred_df.to_csv('/media/Storage/workspace/sudata/submission.csv')
+    pred_df.to_csv('/home/gavin/dev/StumbleUponData/submission.csv')
+    # pred_df.to_csv('/media/Storage/workspace/sudata/submission.csv')
     print "submission file created.."
 
 
