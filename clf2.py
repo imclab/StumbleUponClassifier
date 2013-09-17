@@ -1,6 +1,10 @@
 """
-
+The score to beat:
+20 Fold CV Score:  0.876809206097
 """
+from __future__ import division
+import sys
+import os
 import numpy as np
 from sklearn import metrics,preprocessing,cross_validation
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -9,75 +13,93 @@ import pandas as pd
 from sklearn.svm import SVC
 from scipy import sparse
 
-# need to transpose X-all?
+
+def get_train_data(stem):
+    if stem:
+        return [line.strip() for line in open('train.tsv.clean.stem')]
+    else:
+        return list(np.array(pd.read_table('train.tsv'))[:, 2])
+
+
+def get_test_data(stem):
+    if stem:
+        return [line.strip() for line in open('test.tsv.clean.stem')]
+    else:
+        return list(np.array(pd.read_table('test.tsv'))[:, 2])
+
+
+def stack_tfidf_features(X):
+    pass
+
+
+def get_tfidf_features(X_all):
+    print 'fitting vectorizer'
+    tfidfVectorizer = TfidfVectorizer(min_df=3, max_features=None, strip_accents='unicode', analyzer='word',
+                                      token_pattern=r'\w{1,}', ngram_range=(1, 2), use_idf=1, smooth_idf=1,
+                                      sublinear_tf=1)
+    tfidfVectorizer.fit(X_all)
+    return tfidfVectorizer.transform(X_all)
+
+
+def stack_topic_features(X):
+    print 'stacking topic features'
+    X_all_topics = np.genfromtxt("features.csv", delimiter=",")
+    X_all = sparse.hstack((X, X_all_topics))
+    return X_all.tocsr()
+
+
+def stack_category_features(X):
+    print 'stacking category features'
+    X_all_cats = np.genfromtxt("cat_vectors.csv", delimiter=",")
+    X_all = sparse.hstack((X, X_all_cats))
+    return X_all.tocsr()
+
+
+def stack_is_news_features(X):
+    print 'stacking is_news features'
+    X_all_is_news = np.asmatrix(np.genfromtxt('is_news.csv', delimiter=',')).transpose()
+    X_all = sparse.hstack((X, X_all_is_news))
+    return X_all.tocsr()
+
+
+def write_submission(prediction):
+    testfile = pd.read_csv('test.tsv', sep="\t", na_values=['?'], index_col=1)
+    prediction_df = pd.DataFrame(prediction, index=testfile.index, columns=['label'])
+    prediction_df.to_csv('submission.csv')
+    print "submission file created.."
+
+
 def main():
-    # traindata = list(np.array(pd.read_table('/home/gavin/dev/StumbleUponData/train.tsv'))[:, 2])
-    # traindata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, 2])
-    traindata = [line.strip() for line in open('../StumbleUponData/train.tsv.clean.stem')]
-
-    # testdata = list(np.array(pd.read_table('/home/gavin/dev/StumbleUponData/test.tsv'))[:, 2])
-    # testdata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/test.tsv'))[:, 2])
-    testdata = [line.strip() for line in open('../StumbleUponData/test.tsv.clean.stem')]
-
-    X_all_topics = np.genfromtxt("/home/gavin/dev/StumbleUponData/features.csv", delimiter=",")
-    # X_all_topics = np.genfromtxt("/media/Storage/workspace/sudata/features.csv", delimiter=",")
-    X_all_cats = np.genfromtxt("/home/gavin/dev/StumbleUponData/cat_vectors.csv", delimiter=",")
-    # X_all_cats = np.genfromtxt("/media/Storage/workspace/sudata/cat_vectors.csv", delimiter=",")
-    # X_all_is_news = np.genfromtxt('../StumbleUponData/is_news.csv', delimiter=',')
-    X_all_is_news = np.asmatrix(np.loadtxt('../StumbleUponData/is_news.csv', delimiter=','))
-
-    y = np.array(pd.read_table('/home/gavin/dev/StumbleUponData/train.tsv'))[:, -1]
-    # y = np.array(pd.read_table('/media/Storage/workspace/sudata/y'))[:, 0]
-
-    tfidfVectorizer = TfidfVectorizer(min_df=3, max_features=None, strip_accents='unicode',
-                analyzer='word', token_pattern=r'\w{1,}',
-                ngram_range=(1, 2), use_idf=1, smooth_idf=1, sublinear_tf=1)
+    os.chdir(sys.argv[1])
+    stem = True
+    trainData = get_train_data(stem)
+    testData = get_test_data(stem)
+    y = np.array(pd.read_table('train.tsv'))[:, -1]
 
     rd = lm.LogisticRegression(penalty='l2', dual=True, tol=0.0001,
                                C=1, fit_intercept=True, intercept_scaling=1.0,
                                class_weight=None, random_state=None)
 
-    print 'fitting vectorizer'
+    svc = SVC(probability=True)
 
-    # tfidf features
-    X_all = traindata + testdata
-    lentrain = len(traindata)
-    tfidfVectorizer.fit(X_all)
-    X_all = tfidfVectorizer.transform(X_all)
+    X_all = trainData + testData
+    lenTrain = len(trainData)
 
-    # category features
-    X_all = sparse.hstack((X_all, X_all_cats))
-    X_all = X_all.tocsr()
+    X_all = get_tfidf_features(X_all)
+    X_all = stack_category_features(X_all)
+    X_all = stack_topic_features(X_all)
+    X_all = stack_is_news_features(X_all)
 
-    # topic features
-    X_all = sparse.hstack((X_all, X_all_topics))
-    X_all = X_all.tocsr()
-
-    # is news feature
-    print len(X_all_is_news), X_all_is_news.shape, type(X_all_is_news)
-    print X_all.shape
-    X_all = sparse.hstack((X_all, X_all_is_news))
-    X_all = X_all.tocsr()
-
+    # print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(
+    #     rd, X_all[:lenTrain], y, cv=20, scoring='roc_auc'
+    # ))
     print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(
-        rd, X_all[:lentrain], y, cv=20, scoring='roc_auc'))
+        svc, X_all[:lenTrain], y, cv=20, scoring='roc_auc'
+    )), 'SVM'
 
-    # X_test = X_all[lentrain:]
-    # X = X_all[:lentrain]
-
-    # X = X_all_topics[:lentrain]
-    # X_test = X_all_topics[lentrain:]
-    # print "RD 20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(rd, X, y, cv=20, scoring='roc_auc'))
-
-    rd.fit(X_all[:lentrain], y)
-    pred = rd.predict_proba(X_all[lentrain:])[:, 1]
-
-    testfile = pd.read_csv('/home/gavin/dev/StumbleUponData/test.tsv', sep="\t", na_values=['?'], index_col=1)
-    # testfile = pd.read_csv('/media/Storage/workspace/sudata/test.tsv', sep="\t", na_values=['?'], index_col=1)
-    pred_df = pd.DataFrame(pred, index=testfile.index, columns=['label'])
-    pred_df.to_csv('/home/gavin/dev/StumbleUponData/submission.csv')
-    # pred_df.to_csv('/media/Storage/workspace/sudata/submission.csv')
-    print "submission file created.."
+    # rd.fit(X_all[:lenTrain], y)
+    # predictions = rd.predict_proba(X_all[lenTrain:])[:, 1]
+    # write_submission(predictions)
 
 
 if __name__ == '__main__':

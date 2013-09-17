@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../duplicate_urls/.idea/duplicate_urls.iml" filepath="$PROJECT_DIR$/../duplicate_urls/.idea/duplicate_urls.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/su-clf.iml" filepath="$PROJECT_DIR$/.idea/su-clf.iml" />
     </modules>
   </component>
