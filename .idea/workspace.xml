@@ -7,11 +7,11 @@
     <file path="/reader.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379022817935" ignored="false" />
     <file path="/bench.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379091174621" ignored="false" />
     <file path="/grid.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379021208358" ignored="false" />
-    <file path="/clf2.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379453583474" ignored="false" />
+    <file path="/clf2.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379511243481" ignored="false" />
     <file path="/make_alchemy_cat_vectors.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379093528457" ignored="false" />
     <file path="/scratch.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379093070862" ignored="false" />
     <file path="/scores" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379093866370" ignored="false" />
-    <file path="/grid_searcher.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379096987748" ignored="false" />
+    <file path="/grid_searcher.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379511735707" ignored="false" />
     <file path="/estimator.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379432356410" ignored="false" />
     <file path="/url.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379430259502" ignored="false" />
     <file path="/duplicate_urls.py" changelist="3d53a7d7-82cf-4629-bd40-70415b1772bc" time="1379445650934" ignored="false" />
@@ -49,7 +49,7 @@
       <file leaf-file-name="clf2.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clf2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="39" selection-start="2713" selection-end="2713" vertical-scroll-proportion="0.0">
+            <state line="104" column="27" selection-start="3430" selection-end="3430" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#61#92#0" expanded="true" />
               </folding>
@@ -66,19 +66,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="grid_searcher.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="grid_searcher.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grid_searcher.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="78" selection-start="1877" selection-end="1877" vertical-scroll-proportion="0.0">
+            <state line="39" column="21" selection-start="1619" selection-end="1619" vertical-scroll-proportion="0.48951048">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="grid_search_results.txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="grid_search_results.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grid_search_results.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.6818182">
+            <state line="39" column="0" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -114,9 +114,9 @@
         <option value="$PROJECT_DIR$/../duplicate_urls/duplicate_urls.py" />
         <option value="$PROJECT_DIR$/topic_features.py" />
         <option value="$PROJECT_DIR$/original_benchmark.py" />
+        <option value="$PROJECT_DIR$/grid_search_results.txt" />
         <option value="$PROJECT_DIR$/clf2.py" />
         <option value="$PROJECT_DIR$/grid_searcher.py" />
-        <option value="$PROJECT_DIR$/grid_search_results.txt" />
       </list>
     </option>
   </component>
@@ -256,7 +256,7 @@
       <module name="su-clf" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/grid_searcher.py" />
-      <option name="PARAMETERS" value="" />
+      <option name="PARAMETERS" value="$PROJECT_DIR$/../sudata" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
@@ -422,8 +422,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1599" y="25" width="1922" height="1031" extended-state="6" />
-    <editor active="true" />
+    <frame x="1599" y="25" width="1922" height="1031" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -433,7 +433,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.6617647" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="2165" y="104" width="753" height="900" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.6617647" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="2672" y="48" width="623" height="951" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -584,9 +584,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grid_search_results.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="0" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/clf2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="39" selection-start="2713" selection-end="2713" vertical-scroll-proportion="0.0">
+        <state line="104" column="27" selection-start="3430" selection-end="3430" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#61#92#0" expanded="true" />
           </folding>
@@ -595,14 +602,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grid_searcher.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="78" selection-start="1877" selection-end="1877" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grid_search_results.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.6818182">
+        <state line="39" column="21" selection-start="1619" selection-end="1619" vertical-scroll-proportion="0.48951048">
           <folding />
         </state>
       </provider>

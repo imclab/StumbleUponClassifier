@@ -43,9 +43,13 @@ X_all = X_all.tocsr()
 X_train, X_test, y_train, y_test = train_test_split(X_all[:lentrain], y, test_size=0.5, random_state=0)
 
 # Set the parameters by cross-validation
-tuned_parameters_svc = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
-                     'C': [1, 10, 100, 1000]},
-                    {'kernel': ['linear'], 'C': [1, 10, 100, 1000]}]
+# tuned_parameters_svc = [
+#     {'kernel': ['rbf'], 'gamma': [1e-3, 1e-4], 'C': [1, 10, 100, 1000]},
+#     {'kernel': ['linear'], 'C': [1, 10, 100, 1000]}
+# ]
+tuned_parameters_svc = [
+    {'kernel': ['linear'], 'C': [0.1, 0.5, 1.5, 2.5, 3.5]}
+]
 
 tuned_parameters_lr = [{}]
 
@@ -55,7 +59,7 @@ for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
 
-    clf = GridSearchCV(SVC(C=1, probability=True), tuned_parameters_svc, cv=20, scoring=score)
+    clf = GridSearchCV(SVC(C=1, probability=True, cache_size=1000), tuned_parameters_svc, cv=20, scoring=score)
     clf.fit(X_train, y_train)
 
     print("Best parameters set found on development set:")

@@ -97,7 +97,7 @@ def main():
                                C=1, fit_intercept=True, intercept_scaling=1.0,
                                class_weight=None, random_state=None)
 
-    svc = SVC(probability=True)
+    svc = SVC(probability=True, cache_size=1000)
 
     X_all = trainData + testData
     lenTrain = len(trainData)
