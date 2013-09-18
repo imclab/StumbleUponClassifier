@@ -28,10 +28,6 @@ def get_test_data(stem):
         return list(np.array(pd.read_table('test.tsv'))[:, 2])
 
 
-def stack_tfidf_features(X):
-    pass
-
-
 def get_tfidf_features(X_all):
     print 'fitting vectorizer'
     tfidfVectorizer = TfidfVectorizer(min_df=3, max_features=None, strip_accents='unicode', analyzer='word',
@@ -62,6 +58,27 @@ def stack_is_news_features(X):
     return X_all.tocsr()
 
 
+def stack_parametrizedLinkRatio(X):
+    print 'stacking parametrized link ratio'
+    X_parametrizedLinkRatios_train = list(np.array(pd.read_table('train.tsv'))[:, 24])
+    X_parametrizedLinkRatios_test = list(np.array(pd.read_table('test.tsv'))[:, 24])
+    X_all_parametrizedLinkRatios = np.asmatrix(X_parametrizedLinkRatios_train + X_parametrizedLinkRatios_test).transpose()
+    X_all = sparse.hstack((X, X_all_parametrizedLinkRatios))
+    return X_all.tocsr()
+
+
+def stack_spelling_errors_ratio(X):
+    print 'stacking spelling errors ratio'
+    X_stack_train = list(np.array(pd.read_table('train.tsv'))[:, 25])
+    X_stack_test = list(np.array(pd.read_table('test.tsv'))[:, 25])
+    X_stack_all = np.asmatrix(X_stack_train + X_stack_test).transpose()
+    X_all = sparse.hstack((X, X_stack_all))
+    return X_all.tocsr()
+
+
+# def
+
+
 def write_submission(prediction):
     testfile = pd.read_csv('test.tsv', sep="\t", na_values=['?'], index_col=1)
     prediction_df = pd.DataFrame(prediction, index=testfile.index, columns=['label'])
@@ -71,7 +88,7 @@ def write_submission(prediction):
 
 def main():
     os.chdir(sys.argv[1])
-    stem = True
+    stem = False
     trainData = get_train_data(stem)
     testData = get_test_data(stem)
     y = np.array(pd.read_table('train.tsv'))[:, -1]
@@ -86,16 +103,29 @@ def main():
     lenTrain = len(trainData)
 
     X_all = get_tfidf_features(X_all)
-    X_all = stack_category_features(X_all)
-    X_all = stack_topic_features(X_all)
-    X_all = stack_is_news_features(X_all)
+    # X_all = stack_category_features(X_all)
+    # X_all = stack_topic_features(X_all)
+    # X_all = stack_is_news_features(X_all)
+    # X_all = stack_parametrizedLinkRatio(X_all)
+    # X_all = stack_spelling_errors_ratio(X_all)
+
+    print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(
+        rd, X_all[:lenTrain], y, cv=20, scoring='roc_auc'
+    ))
 
     # print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(
-    #     rd, X_all[:lenTrain], y, cv=20, scoring='roc_auc'
+    #     svc, X_all[:lenTrain], y, cv=20, scoring='roc_auc'
+    # )), 'SVM'
+
+    # p = lm.Perceptron()
+    # print '20 Fold CV Score:', np.mean(cross_validation.cross_val_score(
+    #     p, X_all[:lenTrain], y, cv=20, scoring='roc_auc'
     # ))
-    print "20 Fold CV Score: ", np.mean(cross_validation.cross_val_score(
-        svc, X_all[:lenTrain], y, cv=20, scoring='roc_auc'
-    )), 'SVM'
+
+    # sgd = lm.SGDClassifier()
+    # print '20 Fold CV Score:', np.mean(cross_validation.cross_val_score(
+    #     sgd, X_all[:lenTrain], y, cv=20, scoring='roc_auc'
+    # ))
 
     # rd.fit(X_all[:lenTrain], y)
     # predictions = rd.predict_proba(X_all[lenTrain:])[:, 1]
