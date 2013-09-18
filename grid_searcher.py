@@ -1,5 +1,6 @@
 from __future__ import print_function
-
+import os
+import sys
 from sklearn import datasets
 from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV
@@ -10,15 +11,18 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy import sparse
 
+os.chdir(sys.argv[1])
+# traindata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, 2])
+# testdata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/test.tsv'))[:, 2])
+# X_all_topics = np.genfromtxt("/media/Storage/workspace/sudata/features.csv", delimiter=",")
+# X_all_cats = np.genfromtxt("/media/Storage/workspace/sudata/cat_vectors.csv", delimiter=",")
+# y = np.array(pd.read_table('/media/Storage/workspace/sudata/y'))[:, 0]
+traindata = list(np.array(pd.read_table('train.tsv'))[:, 2])
+testdata = list(np.array(pd.read_table('test.tsv'))[:, 2])
+X_all_topics = np.genfromtxt("features.csv", delimiter=",")
+X_all_cats = np.genfromtxt("cat_vectors.csv", delimiter=",")
+y = np.array(pd.read_table('y'))[:, 0]
 
-traindata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/train.tsv'))[:, 2])
-testdata = list(np.array(pd.read_table('/media/Storage/workspace/sudata/test.tsv'))[:, 2])
-X_all_topics = np.genfromtxt("/media/Storage/workspace/sudata/features.csv", delimiter=",")
-X_all_cats = np.genfromtxt("/media/Storage/workspace/sudata/cat_vectors.csv", delimiter=",")
-
-
-
-y = np.array(pd.read_table('/media/Storage/workspace/sudata/y'))[:, 0]
 
 tfidfVectorizer = TfidfVectorizer(min_df=3,    max_features=None, strip_accents='unicode',
             analyzer='word', token_pattern=r'\w{1,}',
